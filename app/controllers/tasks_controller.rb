@@ -29,14 +29,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.new(task_params)
+    @task = Task.find(params[:id])
 
-    if @task.save
-      flash[:success] = 'task が正常に投稿されました'
+    if @task.update(task_params)
+      flash[:success] = 'task は正常に更新されました'
       redirect_to @task
     else
-      flash.now[:danger] = 'task が投稿されませんでした'
-      render :new
+      flash.now[:danger] = 'task は更新されませんでした'
+      render :edit
     end
   end
   
